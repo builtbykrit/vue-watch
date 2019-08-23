@@ -1,0 +1,13 @@
+.grid-container {
+    display: inline-grid;
+    grid-gap: 1.5rem;
+    width: 100%;
+  
+    &.one {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    &.one-eleven {
+        grid-template-columns: 1fr 11fr;
+    }
+  }
