@@ -1,5 +1,6 @@
 module.exports = {
-  plugins: {
-    autoprefixer: {},
-  },
+  plugins: [
+    require('tailwindcss')(),    // eslint-disable-line
+    require('autoprefixer')(),  // eslint-disable-line
+  ],
 };

@@ -1,0 +1,12 @@
+// Any variables we need to access that aren't available in Tailwind.
+// Only add things here as a last resort option.
+
+
+// Screen sizes
+$breakpoints: (
+    xs: 576px,
+    md: 768px,
+    lg: 1200px
+);
+
+$transition: 0.2s ease-in-out;
