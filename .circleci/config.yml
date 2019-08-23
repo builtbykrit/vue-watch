@@ -46,27 +46,28 @@ jobs:
           root: .
           paths: dist
 
-  # deploy:
-  #   docker:
-  #     - image: circleci/golang:1.9.6
-  #   parallelism: 1
-  #   working_directory: ~/krit/vue-watch
-  #   steps:
-  #     - checkout
-  #     - attach_workspace:
-  #         at:  ~/krit/vue-watch
-  #     - restore_cache:
-  #         key: v1-pkg-cache
-  #     - run: go get -v github.com/bep/s3deploy
-  #     - save_cache:
-  #         key: v1-pkg-cache
-  #         paths:
-  #           - /go/pkg
-  #     - run:
-  #         name: Deploy to S3
-  #         command: |
-  #           source .circleci/setup-env.sh
-  #           s3deploy -source=dist/ -region=us-east-1 -bucket=$AWS_BUCKET_NAME -distribution-id=$CLOUDFRONT_DISTRIBUTION_ID
+  deploy:
+    docker:
+      - image: circleci/golang:1.9.6
+    parallelism: 1
+    working_directory: ~/krit/vue-watch
+    steps:
+      - checkout
+      - attach_workspace:
+          at:  ~/krit/vue-watch
+      - restore_cache:
+          key: v1-pkg-cache
+      - run: go get -v github.com/bep/s3deploy
+      - save_cache:
+          key: v1-pkg-cache
+          paths:
+            - /go/pkg
+      - run:
+          name: Deploy to S3
+          command: |
+            source .circleci/setup-env.sh
+            s3deploy -source=dist/ -region=us-east-1 -bucket=$AWS_BUCKET_NAME -distribution-id=$CLOUDFRONT_DISTRIBUTION_ID
+
 workflows:
   version: 2
   build-and-deploy:
@@ -80,11 +81,11 @@ workflows:
               only:
               - development
               - master
-      # - deploy:
-      #     requires:
-      #       - build
-      #     filters:
-      #       branches:
-      #         only:
-      #           - development
-      #           - master
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - development
+                - master
