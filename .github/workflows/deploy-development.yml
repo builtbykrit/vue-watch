@@ -55,12 +55,9 @@ jobs:
         with:
           name: dist
 
-      - name: Get dependencies
+      - name: deploy to S3
         run: |
           go get -v github.com/bep/s3deploy
-
-      - name: Deploy to S3
-        run: |
           s3deploy -source=dist/ -bucket=${{ secrets.AWS_BUCKET_NAME_DEV }} -distribution-id=${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
 
         env:
