@@ -54,23 +54,14 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: dist
-
-      - name: Get dependencies
-        uses: actions/cache@v1
-        run: |
-          go get -v github.com/bep/s3deploy
-        id: cache
-        with:
-          path: /go/pkg
-          key: v1-pkg-cache
-      
-      - name: Push to S3
-        run: |
-          s3deploy -source=dist/ -bucket=${{ secrets.AWS_BUCKET_NAME_DEV }} -distribution-id=${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
-          
-
+    
+      - uses: actions/checkout@master
+      - name: S3 Deployment
+        uses: peter-evans/s3-backup@v1.0.0
         env:
-          AWS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          REGION: 'us-east-1'
-          CI: true
+          ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+          MIRROR_TARGET: ${{ secrets.AWS_BUCKET_NAME_DEV }}
+          SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          MIRROR_SOURCE: dist
+        with:
+          args: --overwrite --remove
