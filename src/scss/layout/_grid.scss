@@ -7,6 +7,10 @@
       grid-template-columns: minmax(0, 1fr);
     }
 
+    &.one-four-one {
+      grid-template-columns: 1fr 4fr 1fr;      
+    }
+
     &.one-eleven {
         grid-template-columns: 1fr 11fr;
     }
