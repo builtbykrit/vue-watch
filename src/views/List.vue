@@ -12,6 +12,9 @@
         />
       </div>
       <Peep :key="plugin.id" :plugin='plugin' v-for="plugin in pluginsSortedByScore"/>
+      <div class="flex-1 justify-center items-center" v-if='next && loadingPlugins'>
+        <Spinner />
+      </div>
     </div>
     <div>
       <div class="bg-gray-100 rounded p-6">
@@ -40,16 +43,23 @@ import { mapActions, mapGetters } from 'vuex';
 import Count from '@/components/Plugins/Count.vue';
 import Peep from '@/components/Plugins/Peep.vue';
 import TagList from '@/components/Plugins/TagList.vue';
+import Spinner from '@/components/Spinner.vue';
 
 export default {
   name: 'List',
   components: {
     Count,
     Peep,
+    Spinner,
     TagList,
+  },
+  mounted() {
+    this.scroll();
   },
   computed: {
     ...mapGetters([
+      'loadingPlugins',
+      'next',
       'pluginCount',
       'pluginsSortedByScore',
       'tags',
@@ -61,9 +71,23 @@ export default {
   },
   methods: {
     ...mapActions([
+      'fetchNext',
       'fetchPlugins',
       'fetchTags',
     ]),
+    scroll() {
+      window.onscroll = () => {
+        const atThreeFourths = document
+          .documentElement
+          .scrollTop + window.innerHeight >= (
+          document.documentElement.offsetHeight * 0.75
+        );
+
+        if (atThreeFourths && this.next && !this.loadingPlugins) {
+          this.fetchNext();
+        }
+      };
+    },
   },
 };
 </script>
