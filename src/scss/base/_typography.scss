@@ -1,15 +1,16 @@
 html {
+    @apply font-sans;
     // set the base rem reference
     font-size: 13px;
   }
-  
+
   body {
     @apply text-base text-black;
   }
-  
+
   h1 {
     @apply text-6xl font-mono;
-  
+
     @include respond-below(md) {
       @apply text-4xl;
     }
@@ -26,12 +27,12 @@ html {
   h5, h6 {
     @apply text-lg;
   }
-  
+
   p {
     @apply leading-relaxed text-base;
 
   }
-  
+
   a {
     @apply font-bold leading-relaxed text-primary;
     transition: $transition;
