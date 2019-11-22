@@ -32,10 +32,10 @@ module.exports = {
       },
       fontFamily: {
         sans: [
-          'Source Sans Pro',
-          'Helvetica Neue',
+          '\'Source Sans Pro\'',
+          '\'Helvetica Neue\'',
           'Arial',
-          'sans',
+          'sans-serif',
         ],
       },
     },

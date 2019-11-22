@@ -13,6 +13,25 @@
       </div>
       <Peep :key="plugin.id" :plugin='plugin' v-for="plugin in pluginsSortedByScore"/>
     </div>
+    <div>
+      <div class="bg-gray-100 rounded p-6">
+        <p class="text-gray-500 font-bold mb-4">
+          Find the best Vue plugins to use on your project.
+        </p>
+        <a class="block text-green-600 mb-2"
+           href="#">
+          Scoring explained
+        </a>
+        <a class="block text-green-600 mb-2"
+           href="#">
+          Submit a plugin
+        </a>
+        <a class="block text-green-600"
+           href="#">
+          About this site
+        </a>
+      </div>
+    </div>
   </div>
 </template>
 
