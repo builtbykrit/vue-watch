@@ -21,7 +21,6 @@ export default {
     search(search) {
       const self = this;
       const t = _.throttle(() => {
-        console.log('hello');
         self.searchPlugins(search);
       }, 1500, { trailing: false });
 
