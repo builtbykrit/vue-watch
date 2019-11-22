@@ -10,4 +10,8 @@
     &.one-eleven {
         grid-template-columns: 1fr 11fr;
     }
+
+    &.fourty-five--eleven {
+      grid-template-columns: 45px 11fr;      
+    }
   }

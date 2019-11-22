@@ -1,6 +1,6 @@
 <template>
   <div class="plugin-peep pb-12">
-    <div class="grid-container one-eleven">
+    <div class="grid-container fourty-five--eleven">
       <div class="flex justify-end items-start">
         <Score :score="plugin.score"/>
       </div>
