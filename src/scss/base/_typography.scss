@@ -1,11 +1,11 @@
 html {
-    @apply font-sans;
     // set the base rem reference
     font-size: 13px;
   }
 
   body {
     @apply text-base text-black;
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
   }
 
   h1 {
