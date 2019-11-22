@@ -1,4 +1,6 @@
 import axios from 'axios';
+import qs from 'qs';
+
 import api from '../api';
 
 const state = {
@@ -35,6 +37,16 @@ const mutations = {
 };
 
 const actions = {
+  fetchNext: ({ commit, state }) => {
+    commit('SET_LOADING_PLUGINS', true);
+    return axios.get(state.next)
+      .then(({ data }) => {
+        commit('ADD_PLUGINS', data.results);
+        commit('SET_NEXT', data.next);
+      }).finally(() => {
+        commit('SET_LOADING_PLUGINS', false);
+      });
+  },
   fetchPlugins: ({ commit }) => {
     commit('SET_LOADING_PLUGINS', true);
     return api.get('vue_plugins')
@@ -46,11 +58,14 @@ const actions = {
         commit('SET_LOADING_PLUGINS', false);
       });
   },
-  fetchNext: ({ commit, state }) => {
+  searchPlugins: ({ commit }, search) => {
     commit('SET_LOADING_PLUGINS', true);
-    return axios.get(state.next)
+    const params = qs.stringify({ search });
+
+    return api.get(`vue_plugins/?${params}`)
       .then(({ data }) => {
-        commit('ADD_PLUGINS', data.results);
+        commit('SET_PLUGINS', data.results);
+        commit('UPDATE_PLUGIN_COUNT', data.count);
         commit('SET_NEXT', data.next);
       }).finally(() => {
         commit('SET_LOADING_PLUGINS', false);
