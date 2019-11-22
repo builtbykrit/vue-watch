@@ -6,28 +6,40 @@
       </div>
       <div class="col">
         <div class="row">
-          <h2 class="text-primary leading-tight inline">{{ plugin.name }}</h2>
-          <span class="ml-3 text-gray-600 uppercase">{{ plugin.lastReleaseTagName }}</span>
+          <h2 class="leading-tight inline"
+              :class="[
+              {'text-white text-3xl': isDetail},
+              {'text-primary': !isDetail}
+              ]">{{ plugin.name }}</h2>
+          <template v-if="!isDetail">
+            <span class="ml-3 text-gray-600 uppercase">{{ plugin.lastReleaseTagName }}</span>
+          </template>
         </div>
         <div class="row">
           <p class="text-gray-500 font-normal inline text-lg">{{ plugin.description }}</p>
-          <Tag
-            :tag="tag"
-            :key="tag"
-            v-for="tag in plugin.tags"
-          />
+          <template v-if="!isDetail">
+            <Tag
+              :tag="tag"
+              :key="tag"
+              v-for="tag in plugin.tags"
+            />
+          </template>
         </div>
-        <div class="row">
-          <span class="mr-2 text-black font-bold">⭐️ {{plugin.numStars | inThousands }}</span>
-          <span class="mx-2 text-black font-bold">👥 {{plugin.numContributors}}</span>
-          <span class="mx-2 text-black font-bold" v-if="plugin.lastReleaseDate">
+        <div class="row"
+             :class="[
+             {'text-white': isDetail},
+             {'text-black': !isDetail},
+             ]">
+          <span class="mr-2 font-bold">⭐️ {{plugin.numStars | inThousands }}</span>
+          <span class="mx-2 font-bold">👥 {{plugin.numContributors}}</span>
+          <span class="mx-2 font-bold" v-if="plugin.lastReleaseDate">
             🏷 {{plugin.lastReleaseDate | moment("YYYY-MM-DD")}}
           </span>
           <span class="ml-4 mr-2 text-gray-500 text-sm">Last 90 days:</span>
-          <span class="mx-2 text-black font-normal">
+          <span class="mx-2 font-normal">
             ⬇️ {{plugin.numDownloadsRecently | withCommas}}
           </span>
-          <span class="mx-2 text-black font-normal">📝 {{plugin.numCommitsRecently}}</span>
+          <span class="mx-2 font-normal">📝 {{plugin.numCommitsRecently}}</span>
         </div>
       </div>
     </div>
@@ -48,6 +60,13 @@ export default {
     plugin: {
       type: Object,
       required: true,
+    },
+    /**
+     * Determines whether the tags should be displayed
+     */
+    isDetail: {
+      type: Boolean,
+      default: false,
     },
   },
 };
