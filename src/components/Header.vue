@@ -1,9 +1,9 @@
 <template>
-  <div class="header-container">
-    <div class="text-2xl font-bold">
+  <div class="grid-container one-four-one header-container">
+    <div class="text-2xl font-bold pl-12">
       <span aria-hidden="true">👀</span> Vue Watch
     </div>
-    <div class="relative w-2/3 py-4 px-4 bg-black rounded-full">
+    <div class="relative w-full py-4 px-4 bg-black rounded-full">
       <input
         autocomplete="disabled"
         autocorrect="false"
@@ -22,7 +22,7 @@
         <label class="input__label">Search Vue plugins<span aria-hidden="true">...</span></label>
       </div>
     </div>
-    <div class="text-lg font-bold">
+    <div class="text-lg font-bold pr-12 text-right">
       About
     </div>
   </div>
@@ -39,7 +39,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .header-container {
-  @apply flex justify-between bg-gray-900 text-white py-6 px-12 items-center;
+  @apply bg-gray-900 text-white py-6 items-center;
 }
 
 .icon-label-wrapper {
