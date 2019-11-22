@@ -2,7 +2,7 @@
   <div class="list grid-container one-four-one my-12 px-4">
     <div class="tag">
       <p class="mb-6 mx-1 text-gray-500 font-medium text-lg">Tags</p>
-      <TagList :tags="['State Management', 'UI Utility', 'Time & Date']" />
+      <TagList :tags="tags" />
     </div>
     <div v-if="pluginsSortedByScore.length > 0">
       <div class="mb-2">
@@ -33,14 +33,17 @@ export default {
     ...mapGetters([
       'pluginCount',
       'pluginsSortedByScore',
+      'tags',
     ]),
   },
   created() {
     this.fetchPlugins();
+    this.fetchTags();
   },
   methods: {
     ...mapActions([
       'fetchPlugins',
+      'fetchTags',
     ]),
   },
 };
