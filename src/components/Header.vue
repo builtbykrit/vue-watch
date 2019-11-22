@@ -5,6 +5,7 @@
     </div>
     <div class="relative w-full py-4 px-4 bg-black rounded-full">
       <input
+        @input="searchUpdated"
         autocomplete="disabled"
         autocorrect="false"
         spellcheck="false"
@@ -34,6 +35,11 @@ export default {
     return {
       value: '',
     };
+  },
+  methods: {
+    searchUpdated() {
+      this.$emit('searchUpdated', this.$refs.input.value);
+    },
   },
 };
 </script>

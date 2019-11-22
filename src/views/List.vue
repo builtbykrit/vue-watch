@@ -4,14 +4,14 @@
       <p class="mb-6 mx-1 text-gray-500 font-medium text-lg">Tags</p>
       <TagList :tags="tags" />
     </div>
-    <div v-if="pluginsSortedByScore.length > 0">
+    <div v-if="plugins.length > 0">
       <div class="mb-2">
         <Count
           :count='pluginCount'
-          v-if="pluginsSortedByScore.length > 0"
+          v-if="plugins.length > 0"
         />
       </div>
-      <Peep :key="plugin.id" :plugin='plugin' v-for="plugin in pluginsSortedByScore"/>
+      <Peep :key="plugin.id" :plugin='plugin' v-for="plugin in plugins"/>
       <div class="flex-1 justify-center items-center" v-if='next && loadingPlugins'>
         <Spinner />
       </div>
@@ -61,6 +61,7 @@ export default {
       'loadingPlugins',
       'next',
       'pluginCount',
+      'plugins',
       'pluginsSortedByScore',
       'tags',
     ]),
@@ -74,6 +75,7 @@ export default {
       'fetchNext',
       'fetchPlugins',
       'fetchTags',
+      'searchPlugins',
     ]),
     scroll() {
       window.onscroll = () => {

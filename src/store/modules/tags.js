@@ -10,7 +10,6 @@ const getters = {
 
 const mutations = {
   SET_TAGS: (state, payload) => {
-    console.log(payload);
     state.tags = payload;
   },
 };

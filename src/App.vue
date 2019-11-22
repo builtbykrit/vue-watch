@@ -1,16 +1,31 @@
 <template>
   <div id="app">
-    <Header />
+    <Header @searchUpdated="search" />
     <router-view/>
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex';
+import _ from 'lodash';
 import Header from '@/components/Header.vue';
 
 export default {
   name: 'App',
   components: {
     Header,
+  },
+  methods: {
+    ...mapActions([
+      'searchPlugins',
+    ]),
+    search(search) {
+      const self = this;
+      const t = _.throttle(() => {
+        self.searchPlugins(search);
+      }, 1500, { trailing: false });
+
+      t();
+    },
   },
 };
 </script>
