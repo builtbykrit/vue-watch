@@ -2,7 +2,7 @@
   <self-building-square-spinner
     :animation-duration="6000"
     :size="40"
-    color="#ff1d5e"
+    color="#42B983"
   />
 </template>
 <script>
@@ -15,3 +15,8 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+  .self-building-square-spinner {
+    margin: auto;
+  }
+</style>

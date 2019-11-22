@@ -12,7 +12,9 @@
         />
       </div>
       <Peep :key="plugin.id" :plugin='plugin' v-for="plugin in pluginsSortedByScore"/>
-      <Spinner />
+      <div class="flex-1 justify-center items-center" v-if='next && loadingPlugins'>
+        <Spinner />
+      </div>
     </div>
     <div>
       <div class="bg-gray-100 rounded p-6">
@@ -51,8 +53,13 @@ export default {
     Spinner,
     TagList,
   },
+  mounted() {
+    this.scroll();
+  },
   computed: {
     ...mapGetters([
+      'loadingPlugins',
+      'next',
       'pluginCount',
       'pluginsSortedByScore',
       'tags',
@@ -64,9 +71,23 @@ export default {
   },
   methods: {
     ...mapActions([
+      'fetchNext',
       'fetchPlugins',
       'fetchTags',
     ]),
+    scroll() {
+      window.onscroll = () => {
+        const atThreeFourths = document
+          .documentElement
+          .scrollTop + window.innerHeight >= (
+          document.documentElement.offsetHeight * 0.75
+        );
+
+        if (atThreeFourths && this.next && !this.loadingPlugins) {
+          this.fetchNext();
+        }
+      };
+    },
   },
 };
 </script>
