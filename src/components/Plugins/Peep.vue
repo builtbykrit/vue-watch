@@ -20,12 +20,12 @@
         <div class="row">
           <span class="mr-2 text-black font-bold">⭐️ {{plugin.numStars | inThousands }}</span>
           <span class="mx-2 text-black font-bold">👥 {{plugin.numContributors}}</span>
-          <span class="mx-2 text-black font-bold" v-if="plugin.lastReleaseDate">
+          <span class="mx-2 text-black font-bold">
             🏷 {{plugin.lastReleaseDate | moment("YYYY-MM-DD")}}
           </span>
           <span class="ml-4 mr-2 text-gray-500 text-sm">Last 90 days:</span>
           <span class="mx-2 text-black font-normal">
-            ⬇️ {{plugin.numDownloadsRecently | withCommas}}
+            ⬇ {{plugin.numDownloadsRecently | withCommas}}
           </span>
           <span class="mx-2 text-black font-normal">📝 {{plugin.numCommitsRecently}}</span>
         </div>

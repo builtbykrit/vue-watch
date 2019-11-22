@@ -3,14 +3,13 @@ module.exports = {
     extend: {
       colors: {
         primary: '#42B983',
-        black: '#26333E',
+        black: '#304455',
         white: '#FFFFFF',
         gray: {
           100: '#F6F6F6',
           300: '#E7ECF3',
           500: '#8FA7AF',
           600: '#999999',
-          900: '#304455',
         },
         green: {
           100: '#9FD872',
@@ -26,14 +25,6 @@ module.exports = {
           100: '#EDDB35',
           600: '#F2C94C',
         },
-      },
-      fontFamily: {
-        sans: [
-          'Source Sans Pro',
-          'Helvetica Neue',
-          'Arial',
-          'sans',
-        ],
       },
     },
   },

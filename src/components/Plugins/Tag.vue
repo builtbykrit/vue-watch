@@ -19,6 +19,6 @@ export default {
   .tag {
     @apply inline-block rounded-full text-primary mx-1;
     background: rgba(66,185,131, .125);
-    padding: 0.1rem 0.66rem;
+    padding: 0.33rem 0.66rem;
   }
 </style>
