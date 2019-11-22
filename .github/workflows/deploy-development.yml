@@ -56,9 +56,17 @@ jobs:
           name: dist
 
       - name: Get dependencies
+      - uses: actions/cache@v1
         run: |
           go get -v github.com/bep/s3deploy
-          go run s3deploy -source=dist/ -bucket=${{ secrets.AWS_BUCKET_NAME_DEV }} -distribution-id=${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
+        id: cache
+        with:
+          path: /go/pkg
+          key: v1-pkg-cache
+      
+      - name: Push to S3
+        run: |
+          s3deploy -source=dist/ -bucket=${{ secrets.AWS_BUCKET_NAME_DEV }} -distribution-id=${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
           
 
         env:
