@@ -12,6 +12,7 @@
         />
       </div>
       <Peep :key="plugin.id" :plugin='plugin' v-for="plugin in pluginsSortedByScore"/>
+      <Spinner />
     </div>
     <div>
       <div class="bg-gray-100 rounded p-6">
@@ -40,12 +41,14 @@ import { mapActions, mapGetters } from 'vuex';
 import Count from '@/components/Plugins/Count.vue';
 import Peep from '@/components/Plugins/Peep.vue';
 import TagList from '@/components/Plugins/TagList.vue';
+import Spinner from '@/components/Spinner.vue';
 
 export default {
   name: 'List',
   components: {
     Count,
     Peep,
+    Spinner,
     TagList,
   },
   computed: {
