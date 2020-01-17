@@ -61,10 +61,10 @@ jobs:
           SOURCE_DIR: dist
 
       - name: Invalidate Cloudfront CDN
-        uses: actions/aws/cli@master
-        with:
-          args: cloudfront create-invalidation --distribution-id=$CLOUDFRONT_DISTRIBUTION_ID --paths '/*'
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
+        uses: chetan/invalidate-cloudfront-action@master
+          env:
+            DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
+            PATHS: '/*',
+            AWS_REGION: 'us-east-1'
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
