@@ -120,7 +120,9 @@
               </p>
               <p class="text-black font-semibold my-3">
                 <span class="inline-block mr-6">⭐ {{plugin.numStars | withCommas}} stars</span>
-                <span class="inline-block">👥  {{plugin.numContributors | withCommas}} stars</span>
+                <span class="inline-block">
+                  👥  {{plugin.numContributors | withCommas}} contributors
+                </span>
               </p>
               <p class="text-black font-semibold my-3">
                 📝 {{plugin.numCommitsRecently}} commits past 30 days

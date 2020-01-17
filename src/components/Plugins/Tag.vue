@@ -1,10 +1,15 @@
 <template>
   <div
     class="tag">
-    <a href="#" @click="tagClicked(tag)">{{ tag }}</a>
+    <a href="#" @click="tagClicked(tag)">
+      {{ tag }}
+      <span v-if="isSelectedTag">X</span>
+    </a>
   </div>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
   name: 'Tag',
   props: {
@@ -12,9 +17,23 @@ export default {
       type: String,
       required: true,
     },
+    isSelectedTag: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
+  computed: {
+    ...mapGetters([
+      'selectedTag',
+    ]),
   },
   methods: {
+    ...mapActions([
+      'setSelectedTag',
+    ]),
     tagClicked(tagName) {
+      this.setSelectedTag(tagName);
       this.$emit('tagClicked', tagName);
     },
   },
@@ -24,7 +43,7 @@ export default {
   .tag {
     @apply inline-block rounded-full text-primary mx-1 font-semibold;
     background: rgba(66,185,131, .125);
-    padding: 0.45rem 0.75rem;
+    padding: 0.35rem 1rem;
   }
 
 </style>
