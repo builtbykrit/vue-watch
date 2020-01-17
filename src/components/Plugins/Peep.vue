@@ -31,6 +31,7 @@
             <Tag
               :tag="tag"
               :key="tag"
+              @tagClicked="handleTagClicked"
               v-for="tag in plugin.tags"
             />
           </template>
@@ -77,6 +78,11 @@ export default {
     isDetail: {
       type: Boolean,
       default: false,
+    },
+  },
+  methods: {
+    handleTagClicked(tagName) {
+      this.$emit('tagClicked', tagName);
     },
   },
 };

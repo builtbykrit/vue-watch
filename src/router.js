@@ -7,6 +7,8 @@ Vue.use(Router);
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
+  // Scroll to the top of the page after every navigation
+  scrollBehavior: () => ({ x: 0, y: 0 }),
   routes: [
     {
       path: '/',
