@@ -38,6 +38,9 @@ export default {
   },
   methods: {
     searchUpdated() {
+      if (this.$route.name !== 'list') {
+        this.$router.push({ name: 'list' });
+      }
       this.$emit('searchUpdated', this.$refs.input.value);
     },
   },

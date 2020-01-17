@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="content-container">
-      <div class="grid-container two-one mt-6">
+      <div class="grid-container one--thirty-rem mt-6">
         <div class="main-content">
           <div class="tags-section">
             <h2>Tags</h2>
@@ -175,12 +175,12 @@ export default {
   .score-item {
     @apply my-3;
   }
-  .two-one {
-    grid-gap: 3rem;
+  .one--thirty-rem {
+    grid-gap: 5rem;
   }
 
   @media (max-width: 750px) {
-    .two-one {
+    .one--thirty-rem {
       grid-template-columns: 1fr !important;
     }
     .one-four-one {

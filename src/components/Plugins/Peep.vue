@@ -6,7 +6,17 @@
       </div>
       <div class="col">
         <div class="row">
-          <h2 class="leading-tight inline"
+          <router-link
+            v-if="!isDetail"
+            :to="{name: 'details', params: { id: plugin.id} }">
+            <h2 class="leading-tight inline hover:underline"
+                :class="[
+              {'text-white text-5xl': isDetail},
+              {'text-primary text-3xl': !isDetail}
+              ]">{{ plugin.name }}</h2>
+          </router-link>
+          <h2 v-else
+              class="leading-tight inline"
               :class="[
               {'text-white text-5xl': isDetail},
               {'text-primary text-3xl': !isDetail}

@@ -43,7 +43,7 @@ export default {
 </script>
 <style lang="scss" scoped>
   .score {
-    @apply flex items-center justify-center text-white rounded font-bold text-2xl p-3 mt-4;
+    @apply flex items-center justify-center text-white rounded font-bold text-2xl p-3 mt-2;
     height: 3rem;
     width: 3.5rem;
   }

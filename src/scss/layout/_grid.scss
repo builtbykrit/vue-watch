@@ -35,6 +35,10 @@ body {
     grid-template-columns: 2rem 1fr;
     grid-gap: 0.25rem;
   }
+
+  &.one--thirty-rem {
+    grid-template-columns: 1fr 30rem;
+  }
 }
 
 .content-container {
