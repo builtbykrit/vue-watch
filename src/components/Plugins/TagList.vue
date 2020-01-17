@@ -2,7 +2,7 @@
   <div
     class="tag-list">
     <div class="block mb-4" v-for="tag in tags" :key="tag">
-      <Tag :tag='tag' />
+      <Tag :tag='tag' @tagClicked="tagClicked"/>
     </div>
   </div>
 </template>
@@ -18,6 +18,11 @@ export default {
     tags: {
       type: Array,
       default: () => [],
+    },
+  },
+  methods: {
+    tagClicked(tagName) {
+      this.$emit('tagClicked', tagName);
     },
   },
 };
