@@ -125,4 +125,10 @@ export default {
   .score-item {
     @apply my-3;
   }
+
+  @include respond-below(md) {
+    .two-one {
+      grid-template-columns: 1fr !important;
+    }
+  }
 </style>
