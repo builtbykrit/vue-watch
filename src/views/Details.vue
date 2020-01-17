@@ -36,7 +36,7 @@
           <div class="score-section mt-6">
             <h2>Score</h2>
             <p>Plugins are scored with a combination of manual and automated boolean criteria.
-              The score is calculated by adding a point for each criteria, with10 being the highest
+              The score is calculated by adding a point for each criteria, with 10 being the highest
               possible score.</p>
             <div class="grid-container one-one mt-6">
               <div class="manual-review">

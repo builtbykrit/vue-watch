@@ -19,6 +19,10 @@ body {
     grid-template-columns: 1fr 4fr 1fr;
   }
 
+  &.one-four {
+    grid-template-columns: 1fr 4fr;
+  }
+
   &.one-eleven {
       grid-template-columns: 1fr 11fr;
   }
