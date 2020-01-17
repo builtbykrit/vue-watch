@@ -32,6 +32,12 @@ module.exports = {
         },
       },
       fontFamily: {
+        display: [
+          '\'Source Sans Pro\'',
+          '\'Helvetica Neue\'',
+          'Arial',
+          'sans-serif',
+        ],
         sans: [
           '\'Source Sans Pro\'',
           '\'Helvetica Neue\'',

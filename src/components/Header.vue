@@ -1,7 +1,9 @@
 <template>
   <div class="grid-container one-four-one header-container">
     <div class="text-2xl font-bold pl-12">
-      <span aria-hidden="true">👀</span> Vue Watch
+      <router-link class="hover:no-underline text-gray-300 hover:text-white" :to="{ name: 'list' }">
+        <span aria-hidden="true">👀</span> Vue Watch
+      </router-link>
     </div>
     <div class="relative w-full py-4 px-4 bg-black rounded-full">
       <input
@@ -24,7 +26,9 @@
       </div>
     </div>
     <div class="text-lg font-bold pr-12 text-right">
-      About
+      <router-link class="text-gray-500 hover:text-white" :to="{ name: 'about' }">
+        About
+      </router-link>
     </div>
   </div>
 </template>
