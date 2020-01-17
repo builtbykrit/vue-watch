@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - development
+      - task/fix-deployment
 
 jobs:
   build:
@@ -48,21 +49,22 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: dist
-    
+
       - name: Deploy to S3
-        uses: actions/aws/cli@master
+      - uses: jakejarvis/s3-sync-action@master
         with:
-          args: s3 cp ./dist s3://$AWS_BUCKET_NAME --recursive
+          args: --acl public-read --follow-symlinks --delete
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}          
-          AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME_DEV }}
-      
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_S3_BUCKET: ${{ secrets.AWS_BUCKET_NAME_DEV }}
+          SOURCE_DIR: dist
+
       - name: Invalidate Cloudfront CDN
         uses: actions/aws/cli@master
         with:
           args: cloudfront create-invalidation --distribution-id=$CLOUDFRONT_DISTRIBUTION_ID --paths '/*'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
