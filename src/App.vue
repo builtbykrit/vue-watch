@@ -22,6 +22,12 @@ export default {
       const self = this;
       const t = _.throttle(() => {
         self.searchPlugins(search);
+        // Track search event
+        self.$ga.event({
+          eventCategory: 'Search Bar',
+          eventAction: 'search',
+          eventLabel: search,
+        });
       }, 1500, { trailing: false });
 
       t();
