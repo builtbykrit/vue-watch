@@ -81,6 +81,12 @@ export default {
       'fetchPluginsByTag',
     ]),
     handleTagClicked(tagName) {
+      // Track tag click
+      this.$ga.event({
+        eventCategory: 'Tag',
+        eventAction: 'click',
+        eventLabel: tagName,
+      });
       this.fetchPluginsByTag(tagName);
     },
     scroll() {
