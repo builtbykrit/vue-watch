@@ -1,25 +1,25 @@
 html {
     // set the base rem reference
-    font-size: 13px;
+    font-size: 14px;
   }
 
   body {
-    @apply text-base text-black;
+    @apply antialiased text-base text-black;
     font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
   }
 
   h1 {
-    @apply text-6xl font-mono;
+    @apply text-6xl text-black;
 
     @include respond-below(md) {
       @apply text-4xl;
     }
   }
   h2 {
-    @apply text-3xl;
+    @apply text-5xl font-semibold;
   }
   h3 {
-    @apply text-2xl;
+    @apply text-xl font-semibold text-gray-600;
   }
   h4 {
     @apply text-xl;
@@ -29,7 +29,7 @@ html {
   }
 
   p {
-    @apply leading-relaxed text-base;
+    @apply leading-relaxed text-gray-500 font-normal inline text-lg;
 
   }
 
