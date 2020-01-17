@@ -70,6 +70,18 @@ const actions = {
         commit('UPDATE_PLUGIN', data);
       });
   },
+  fetchPluginsByTag: ({ commit }, tagName) => {
+    commit('SET_LOADING_PLUGINS', true);
+    const params = qs.stringify({ tags: tagName });
+    return api.get(`vue_plugins/?${params}`)
+      .then(({ data }) => {
+        commit('SET_PLUGINS', data.results);
+        commit('UPDATE_PLUGIN_COUNT', data.count);
+        commit('SET_NEXT', data.next);
+      }).finally(() => {
+        commit('SET_LOADING_PLUGINS', false);
+      });
+  },
   searchPlugins: ({ commit }, search) => {
     commit('SET_LOADING_PLUGINS', true);
     const params = qs.stringify({ search });

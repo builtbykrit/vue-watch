@@ -2,7 +2,7 @@
   <div class="list grid-container one-four-one my-12 px-4">
     <div class="tag">
       <p class="mb-6 mx-1 text-gray-500 font-medium text-lg">Tags</p>
-      <TagList :tags="tags" />
+      <TagList :tags="tags" @tagClicked="handleTagClicked"/>
     </div>
     <div v-if="plugins.length > 0">
       <div class="mb-2">
@@ -76,7 +76,11 @@ export default {
       'fetchPlugins',
       'fetchTags',
       'searchPlugins',
+      'fetchPluginsByTag',
     ]),
+    handleTagClicked(tagName) {
+      this.fetchPluginsByTag(tagName);
+    },
     scroll() {
       window.onscroll = () => {
         const atThreeFourths = document
