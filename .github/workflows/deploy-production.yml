@@ -1,10 +1,10 @@
 
-name: Deploy Development
+name: Deploy Production
 
 on:
   push:
     branches:
-      - development
+      - master
 
 jobs:
   build:
@@ -25,7 +25,7 @@ jobs:
       - name: npm install and build
         run: |
           npm install
-          NODE_ENV=production npm run build-${{ secrets.BUILD_NAME_DEV }}
+          NODE_ENV=production npm run build-${{ secrets.BUILD_NAME_PROD }}
 
       - name: Persist build file
         uses: actions/upload-artifact@v1
@@ -56,13 +56,13 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_S3_BUCKET: ${{ secrets.AWS_BUCKET_NAME_DEV }}
+          AWS_S3_BUCKET: ${{ secrets.AWS_BUCKET_NAME_PROD }}
           SOURCE_DIR: 'dist'
 
       - name: Invalidate Cloudfront CDN
         uses: chetan/invalidate-cloudfront-action@master
         env:
-          DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
+          DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_PROD }}
           PATHS: '/*'
           AWS_REGION: 'us-east-1'
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
