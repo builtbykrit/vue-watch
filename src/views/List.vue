@@ -62,7 +62,9 @@ export default {
     ]),
   },
   created() {
-    this.fetchPlugins();
+    if (!this.selectedTag) {
+      this.fetchPlugins();
+    }
     this.fetchTags();
   },
   methods: {
