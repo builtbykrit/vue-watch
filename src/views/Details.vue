@@ -1,5 +1,5 @@
 <template>
-  <div class="plugin-details">
+  <div class="plugin-details" v-if="plugin">
     <div class="pugin-header bg-gray-900">
       <div class="content-container">
         <div class="grid-container one-four-one">
@@ -11,8 +11,8 @@
               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.75.34a1 1 0 01-.1 1.41L2.53 4.5l3.14 2.75a1 1 0 11-1.32 1.5l-4-3.5a1 1 0 010-1.5l4-3.5a1 1 0 011.41.1z"/>
             </svg>
             <span>
-        View all plugins
-      </span>
+              View all plugins
+            </span>
           </router-link>
           <Peep :plugin='plugin'
                 :isDetail="true"
@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <div class="content-container">
+    <div class="content-container" v-if="plugin">
       <div class="grid-container one--thirty-rem mt-6">
         <div class="main-content">
           <div class="tags-section">
