@@ -29,11 +29,18 @@ html {
   }
 
   p {
-    @apply leading-relaxed text-gray-500 font-normal text-lg;
+    @apply leading-relaxed text-gray-600 font-normal text-lg;
 
+    a {
+      @apply text-primary;
+    }
   }
 
   a {
     @apply font-bold leading-relaxed text-primary;
     transition: $transition;
+
+    &:hover {
+      @apply text-primary underline;
+    }
   }
