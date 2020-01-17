@@ -7,7 +7,6 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex';
 import Tag from './Tag.vue';
 
 export default {
@@ -21,17 +20,8 @@ export default {
       default: () => [],
     },
   },
-  computed: {
-    ...mapGetters([
-      'selectedTag',
-    ]),
-  },
   methods: {
-    ...mapActions([
-      'setSelectedTag',
-    ]),
     tagClicked(tagName) {
-      this.setSelectedTag(tagName);
       this.$emit('tagClicked', tagName);
     },
   },
