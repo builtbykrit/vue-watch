@@ -1,4 +1,8 @@
 export default function (int) {
+  // Fix undefined errors
+  if (!int) {
+    return int;
+  }
   const pattern = /(-?\d+)(\d{3})/;
   let x = int.toString();
 
