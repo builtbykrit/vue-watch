@@ -6,16 +6,26 @@
       </div>
       <div class="col">
         <div class="row">
-          <h2 class="leading-tight inline"
+          <router-link
+            v-if="!isDetail"
+            :to="{name: 'details', params: { id: plugin.id} }">
+            <h2 class="leading-tight inline hover:underline"
+                :class="[
+              {'text-white text-5xl': isDetail},
+              {'text-primary text-3xl': !isDetail}
+              ]">{{ plugin.name }}</h2>
+          </router-link>
+          <h2 v-else
+              class="leading-tight inline"
               :class="[
-              {'text-white text-3xl': isDetail},
-              {'text-primary': !isDetail}
+              {'text-white text-5xl': isDetail},
+              {'text-primary text-3xl': !isDetail}
               ]">{{ plugin.name }}</h2>
           <template v-if="!isDetail">
             <span class="ml-3 text-gray-600 uppercase">{{ plugin.lastReleaseTagName }}</span>
           </template>
         </div>
-        <div class="row">
+        <div class="row mt-0">
           <p class="text-gray-500 font-normal inline text-lg">{{ plugin.description }}</p>
           <template v-if="!isDetail">
             <Tag
@@ -25,21 +35,21 @@
             />
           </template>
         </div>
-        <div class="row"
+        <div class="row pt-2"
              :class="[
              {'text-white': isDetail},
              {'text-black': !isDetail},
              ]">
-          <span class="mr-2 font-bold">⭐️ {{plugin.numStars | inThousands }}</span>
-          <span class="mx-2 font-bold">👥 {{plugin.numContributors}}</span>
-          <span class="mx-2 font-bold" v-if="plugin.lastReleaseDate">
+          <span class="mr-2 font-semibold">⭐️ {{plugin.numStars | inThousands }}</span>
+          <span class="mx-2 font-semibold">👥 {{plugin.numContributors}}</span>
+          <span class="mx-2 font-semibold" v-if="plugin.lastReleaseDate">
             🏷 {{plugin.lastReleaseDate | moment("YYYY-MM-DD")}}
           </span>
           <span class="ml-4 mr-2 text-gray-500 text-sm">Last 90 days:</span>
-          <span class="mx-2 font-normal">
+          <span class="mx-2 font-semibold">
             ⬇️ {{plugin.numDownloadsRecently | withCommas}}
           </span>
-          <span class="mx-2 font-normal">📝 {{plugin.numCommitsRecently}}</span>
+          <span class="mx-2 font-semibold">📝 {{plugin.numCommitsRecently}}</span>
         </div>
       </div>
     </div>

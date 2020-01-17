@@ -22,9 +22,9 @@ export default {
 </script>
 <style lang="scss" scoped>
   .tag {
-    @apply inline-block rounded-full text-primary mx-1 font-medium;
+    @apply inline-block rounded-full text-primary mx-1 font-semibold;
     background: rgba(66,185,131, .125);
-    padding: 0.33rem 0.66rem;
+    padding: 0.45rem 0.75rem;
   }
 
 </style>

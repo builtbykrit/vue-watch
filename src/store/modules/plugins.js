@@ -4,6 +4,7 @@ import qs from 'qs';
 import api from '../api';
 
 const state = {
+  plugin: null,
   plugins: [],
   pluginCount: 0,
   loadingPlugins: false,
@@ -13,6 +14,7 @@ const state = {
 const getters = {
   loadingPlugins: ({ loadingPlugins }) => loadingPlugins,
   next: ({ next }) => next,
+  plugin: ({ plugin }) => plugin,
   plugins: ({ plugins }) => plugins,
   pluginsSortedByScore: ({ plugins }) => plugins.sort((a, b) => (a.score < b.score ? 1 : -1)),
   pluginCount: ({ pluginCount }) => pluginCount,
@@ -24,6 +26,9 @@ const mutations = {
   },
   SET_PLUGINS: (state, payload) => {
     state.plugins = payload;
+  },
+  UPDATE_PLUGIN: (state, payload) => {
+    state.plugin = payload;
   },
   UPDATE_PLUGIN_COUNT: (state, payload) => {
     state.pluginCount = payload;
@@ -56,6 +61,13 @@ const actions = {
         commit('SET_NEXT', data.next);
       }).finally(() => {
         commit('SET_LOADING_PLUGINS', false);
+      });
+  },
+  // eslint-disable-next-line arrow-body-style
+  fetchPlugin: ({ commit }, id) => {
+    return api.get(`vue_plugins/${id}/`)
+      .then(({ data }) => {
+        commit('UPDATE_PLUGIN', data);
       });
   },
   fetchPluginsByTag: ({ commit }, tagName) => {
