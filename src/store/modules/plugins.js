@@ -1,25 +1,98 @@
+import axios from 'axios';
+import qs from 'qs';
+
 import api from '../api';
 
 const state = {
+  plugin: null,
   plugins: [],
+  pluginCount: 0,
+  loadingPlugins: false,
+  next: '',
 };
 
 const getters = {
+  loadingPlugins: ({ loadingPlugins }) => loadingPlugins,
+  next: ({ next }) => next,
+  plugin: ({ plugin }) => plugin,
   plugins: ({ plugins }) => plugins,
   pluginsSortedByScore: ({ plugins }) => plugins.sort((a, b) => (a.score < b.score ? 1 : -1)),
+  pluginCount: ({ pluginCount }) => pluginCount,
 };
 
 const mutations = {
-  UPDATE_PLUGINS: (state, payload) => {
+  ADD_PLUGINS: (state, payload) => {
+    state.plugins = [...state.plugins, ...payload];
+  },
+  SET_PLUGINS: (state, payload) => {
     state.plugins = payload;
+  },
+  UPDATE_PLUGIN: (state, payload) => {
+    state.plugin = payload;
+  },
+  UPDATE_PLUGIN_COUNT: (state, payload) => {
+    state.pluginCount = payload;
+  },
+  SET_LOADING_PLUGINS: (state, payload) => {
+    state.loadingPlugins = payload;
+  },
+  SET_NEXT: (state, payload) => {
+    state.next = payload;
   },
 };
 
 const actions = {
-  fetchPlugins: ({ commit }) => {
-    api.get('vue_plugins')
+  fetchNext: ({ commit, state }) => {
+    commit('SET_LOADING_PLUGINS', true);
+    return axios.get(state.next)
       .then(({ data }) => {
-        commit('UPDATE_PLUGINS', data.results);
+        commit('ADD_PLUGINS', data.results);
+        commit('SET_NEXT', data.next);
+      }).finally(() => {
+        commit('SET_LOADING_PLUGINS', false);
+      });
+  },
+  fetchPlugins: ({ commit }) => {
+    commit('SET_LOADING_PLUGINS', true);
+    return api.get('vue_plugins')
+      .then(({ data }) => {
+        commit('SET_PLUGINS', data.results);
+        commit('UPDATE_PLUGIN_COUNT', data.count);
+        commit('SET_NEXT', data.next);
+      }).finally(() => {
+        commit('SET_LOADING_PLUGINS', false);
+      });
+  },
+  // eslint-disable-next-line arrow-body-style
+  fetchPlugin: ({ commit }, id) => {
+    return api.get(`vue_plugins/${id}/`)
+      .then(({ data }) => {
+        commit('UPDATE_PLUGIN', data);
+      });
+  },
+  fetchPluginsByTag: ({ commit }, tagName) => {
+    commit('SET_LOADING_PLUGINS', true);
+    const params = qs.stringify({ tags: tagName });
+    return api.get(`vue_plugins/?${params}`)
+      .then(({ data }) => {
+        commit('SET_PLUGINS', data.results);
+        commit('UPDATE_PLUGIN_COUNT', data.count);
+        commit('SET_NEXT', data.next);
+      }).finally(() => {
+        commit('SET_LOADING_PLUGINS', false);
+      });
+  },
+  searchPlugins: ({ commit }, search) => {
+    commit('SET_LOADING_PLUGINS', true);
+    const params = qs.stringify({ search });
+
+    return api.get(`vue_plugins/?${params}`)
+      .then(({ data }) => {
+        commit('SET_PLUGINS', data.results);
+        commit('UPDATE_PLUGIN_COUNT', data.count);
+        commit('SET_NEXT', data.next);
+      }).finally(() => {
+        commit('SET_LOADING_PLUGINS', false);
       });
   },
 };
