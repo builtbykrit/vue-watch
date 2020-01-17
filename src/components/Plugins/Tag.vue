@@ -1,7 +1,7 @@
 <template>
   <div
     class="tag">
-    <span>{{ tag }}</span>
+    <a href="#" @click="tagClicked(tag)">{{ tag }}</a>
   </div>
 </template>
 <script>
@@ -13,6 +13,11 @@ export default {
       required: true,
     },
   },
+  methods: {
+    tagClicked(tagName) {
+      this.$emit('tagClicked', tagName);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -21,4 +26,5 @@ export default {
     background: rgba(66,185,131, .125);
     padding: 0.33rem 0.66rem;
   }
+
 </style>
