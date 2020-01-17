@@ -3,7 +3,14 @@
     <div class="list grid-container one-four my-12 px-4">
       <div class="tag-list">
         <p class="mb-6 mx-1 text-gray-500 font-medium text-lg">Tags</p>
-        <TagList :tags="tags" @tagClicked="handleTagClicked"/>
+        <div v-if="selectedTag" class="mb-5">
+          <Tag :tag='selectedTag'
+               @tagClicked="removeSelectedTag"
+                :isSelectedTag="true"/>
+        </div>
+        <TagList :tags="tags"
+                 :class="{ 'opacity-50': selectedTag }"
+                 @tagClicked="handleTagClicked"/>
       </div>
       <div v-if="plugins.length > 0">
         <div class="mb-2">
@@ -12,7 +19,9 @@
             v-if="plugins.length > 0"
           />
         </div>
-        <Peep :key="plugin.id" :plugin='plugin' v-for="plugin in plugins"/>
+        <Peep :key="plugin.id"
+              @tagClicked="handleTagClicked"
+              :plugin='plugin' v-for="plugin in plugins"/>
         <div class="flex-1 justify-center items-center" v-if='next && loadingPlugins'>
           <Spinner />
         </div>
@@ -25,6 +34,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import Count from '@/components/Plugins/Count.vue';
 import Peep from '@/components/Plugins/Peep.vue';
+import Tag from '@/components/Plugins/Tag.vue';
 import TagList from '@/components/Plugins/TagList.vue';
 import Spinner from '@/components/Spinner.vue';
 
@@ -34,6 +44,7 @@ export default {
     Count,
     Peep,
     Spinner,
+    Tag,
     TagList,
   },
   mounted() {
@@ -46,6 +57,7 @@ export default {
       'pluginCount',
       'plugins',
       'pluginsSortedByScore',
+      'selectedTag',
       'tags',
     ]),
   },
@@ -59,10 +71,15 @@ export default {
       'fetchPlugins',
       'fetchTags',
       'searchPlugins',
+      'clearSelectedTag',
       'fetchPluginsByTag',
     ]),
     handleTagClicked(tagName) {
       this.fetchPluginsByTag(tagName);
+    },
+    removeSelectedTag() {
+      this.clearSelectedTag();
+      this.fetchPlugins();
     },
     scroll() {
       window.onscroll = () => {
