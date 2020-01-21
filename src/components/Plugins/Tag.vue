@@ -43,7 +43,7 @@ export default {
   .tag {
     @apply inline-block rounded-full text-primary mx-1 font-semibold;
     background: rgba(66,185,131, .125);
-    padding: 0.35rem 1rem;
+    padding: 0.25rem 1rem;
   }
 
 </style>

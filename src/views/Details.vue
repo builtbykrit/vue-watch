@@ -28,6 +28,7 @@
             <div class="tags-list mt-4">
               <Tag
                 :tag="tag"
+                @tagClicked="handleTagClicked"
                 :key="tag"
                 v-for="tag in plugin.tags"
               />
@@ -164,7 +165,12 @@ export default {
   methods: {
     ...mapActions([
       'fetchPlugin',
+      'fetchPluginsByTag',
     ]),
+    handleTagClicked(tagName) {
+      this.$router.push({ name: 'list' });
+      this.fetchPluginsByTag(tagName);
+    },
   },
 };
 </script>
